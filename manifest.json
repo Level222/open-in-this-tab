@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Open in This Tab",
+  "version": "1.0.0",
+  "description": "Add an \"Open in This Tab\" button to the context menu when right-clicking a link.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "contextMenus"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
