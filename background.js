@@ -1,6 +1,11 @@
 const MENU_ID = "open-in-this-tab";
 
-chrome.runtime.onInstalled.addListener(() => {
+const clearContextMenus = () => new Promise((resolve) => {
+  chrome.contextMenus.removeAll(resolve);
+});
+
+chrome.runtime.onInstalled.addListener(async () => {
+  await clearContextMenus();
   chrome.contextMenus.create({
     title: "Open in This Tab",
     id: MENU_ID,
@@ -8,7 +13,7 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
-chrome.contextMenus.onClicked.addListener(({menuItemId, linkUrl}, tab) => {
+chrome.contextMenus.onClicked.addListener(({ menuItemId, linkUrl }, tab) => {
   if (menuItemId === MENU_ID && linkUrl && tab) {
     chrome.tabs.update(tab.id, {
       url: linkUrl
